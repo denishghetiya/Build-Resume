@@ -1,0 +1,76 @@
+﻿@model BuildResume.ViewModels.ResumeDataViewModel
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Professional Profile</title>
+</head>
+<body style="margin:0; font-family:'Poppins', Arial, sans-serif; background:linear-gradient(135deg, #e3f2fd, #ffffff); padding:40px;">
+
+    <div style="max-width:800px; margin:0 auto; background:#fff; border-radius:16px; box-shadow:0 10px 25px rgba(0,0,0,0.1); padding:40px 50px;">
+
+        <!-- Header -->
+        <div style="text-align:center; margin-bottom:35px;">
+            <h1 style="margin:0; font-size:30px; color:#2b2b2b;">Professional Profile</h1>
+            <p style="color:#666; font-size:15px; margin-top:8px;">Personal Summary, Experience & Project Overview</p>
+            <div style="width:60px; height:3px; background:#0078d7; margin:15px auto 0;"></div>
+        </div>
+
+        <!-- Summary -->
+        <section style="margin-bottom:40px;">
+            <h2 style="font-size:20px; color:#0078d7; margin-bottom:10px;">👤 Summary</h2>
+            <div style="background:#f9fafc; border-radius:10px; padding:20px; border:1px solid #e0e0e0;">
+                <p style="margin:8px 0;"><strong>FirstName:</strong><lable id="firstnamesumary" name="FirstName">@Model.FirstName</lable></p>
+                <p style="margin:8px 0;"><strong>LastName</strong><lable id="lastnamesumary" name="LastName">@Model.LastName</lable></p>
+                <p style="margin:8px 0;"><strong>Phone Number:</strong><lable id="phoneNumbersumary" name="PhoneNumber">@Model.PhoneNumber</lable></p>
+                <p style="margin:8px 0;"><strong>Email:</strong><lable id="emailsumary" name="Email">@Model.Email</lable></p>
+            </div>
+        </section>
+        @for (int i = 0; i < Model.Experience.Count; i++)
+        {
+            var exp = Model.Experience[i];
+            <!-- Experience -->
+            <section class="expsummary" style="margin-bottom:40px;">
+                <h2 style="font-size:20px; color:#0078d7; margin-bottom:10px;">💼 Experience</h2>
+            <div style="background:#f9fafc; border-radius:10px; padding:20px; border:1px solid #e0e0e0;">
+                    <p style="margin:8px 0;"><strong>Company Nmae:</strong><lable name="Experience[@i].CompanyName">@exp.CompanyName</lable></p>
+                    <p style="margin:8px 0;"><strong>Role:</strong><lable name="Experience[@i].Role">@exp.Role</lable></p>
+                    <p style="margin:8px 0;"><strong>StartDate:</strong><lable name="Experience[@i].StartDate">@exp.StartDate</lable></p>
+                    <p style="margin:8px 0;"><strong>EndDate:</strong><lable name="Experience[@i].EndDate">@exp.EndDate</lable></p>
+                    <p style="margin:8px 0;"><strong>Experience:</strong><lable name="Experience[@i].Experience">@exp.Experience</lable></p>
+                    @for (int j = 0; j < exp.Projects.Count; j++)
+                    {
+                        var proj = exp.Projects[j];
+                        <!-- Project -->
+                        <div class="projsummary" style="margin-top:25px; background:#ffffff; border-left:4px solid #0078d7; border-radius:10px; padding:20px; box-shadow:0 4px 10px rgba(0,0,0,0.05);">
+                            <h3 style="font-size:18px; color:#333; margin-bottom:10px;">🚀 Project Details</h3>
+                            <p style="margin:6px 0;"><strong>Project Name:</strong><lable name="Experience[@i].Project[@j].ProjectName">@proj.ProjectName</lable></p>
+                            <p style="margin:6px 0;"><strong>Role:</strong><lable name="Experience[@i].Project[@j].Role">@proj.Role</lable></p>
+                            <p style="margin:6px 0;"><strong>Technologies:</strong><lable name="Experience[@i].Project[@j].TechnologyNames">@proj.TechnologyNames</lable></p>
+                            <p style="margin:6px 0;"><strong>Start:</strong><lable name="Experience[@i].Project[@j].StartDate">@proj.StartDate</lable></p>
+                            <p style="margin:6px 0;"><strong>End:</strong><lable name="Experience[@i].Project[@j].EndDate">@proj.EndDate</lable></p>
+                            <p style="margin:6px 0;">
+                                <strong>Languages Used:</strong><lable name="Experience[@i].Project[@j].ProjectLanguage">
+                                    @* @foreach(var pl in proj.ProjectLanguage) *@
+                                    @for (int k = 0; k < proj.ProjectLanguage.Count; k++)
+                                    {
+                                        var pl = proj.ProjectLanguage[k];
+                                        if (pl.IsChecked == true)
+                                        {
+                                            @* <label name="Experience[@i].Project[@j].ProjectLanguage[@k].ProjectLanguageName">@pl.ProjectLanguageName</label> *@
+                                            @pl.ProjectLanguageName
+                                        }
+                                    }
+                                </lable>
+                            </p>
+                </div>
+                }
+            </div>
+        </section>
+        }
+    </div>
+
+</body>
+</html>

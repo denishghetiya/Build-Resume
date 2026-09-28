@@ -1,0 +1,51 @@
+﻿@model BuildResume.ViewModels.ResumeDataViewModel
+
+<div class="" style="border:5px solid #ccc; border-color:red; padding:15px; border-radius:5px;">
+
+    <strong>Summary :</strong><br />
+    FirstName: <lable id="firstnamesumary" name="FirstName">@Model.FirstName</lable><br />
+    LastName: <lable id="lastnamesumary" name="LastName">@Model.LastName</lable><br />
+    PhoneNumber: <lable id="phoneNumbersumary" name="PhoneNumber">@Model.PhoneNumber</lable><br />
+    Email: <lable id="emailsumary" name="Email">@Model.Email</lable><br />
+
+    @* @foreach (var exp in Model.Experience) *@
+    @for(int i=0;i<Model.Experience.Count;i++)
+    {
+        var exp = Model.Experience[i];
+        <div class="expsummary" style="border:5px solid #ccc; border-color:green; padding:15px; border-radius:5px;">
+            <strong>Experience : </strong><br />
+            Company: <lable name="Experience[@i].CompanyName">@exp.CompanyName</lable><br />
+            Role: <lable name="Experience[@i].Role">@exp.Role</lable><br />
+            StartDate: <lable name="Experience[@i].StartDate">@exp.StartDate</lable><br />
+            EndDate: <lable name="Experience[@i].EndDate">@exp.EndDate</lable><br />
+            Experience: <lable name="Experience[@i].Experience">@exp.Experience</lable><br />
+
+            @* @foreach (var proj in exp.Projects) *@
+            @for(int j=0;j<exp.Projects.Count;j++)
+            {
+                var proj = exp.Projects[j];
+                <div class="projsummary" style="border:5px solid #ccc; border-color:blue; padding:15px; border-radius:5px;">
+                    <strong>Project : </strong><br />
+                    Project Name: <lable name="Experience[@i].Project[@j].ProjectName">@proj.ProjectName</lable><br />
+                    Role: <lable name="Experience[@i].Project[@j].Role">@proj.Role</lable><br />
+                    TechNames: <lable name="Experience[@i].Project[@j].TechnologyNames">@proj.TechnologyNames</lable><br />
+                    Start: <lable name="Experience[@i].Project[@j].StartDate">@proj.StartDate</lable><br />
+                    End: <lable name="Experience[@i].Project[@j].EndDate">@proj.EndDate</lable><br />
+                    <strong>Project Language : </strong>
+                    <lable name="Experience[@i].Project[@j].ProjectLanguage">
+                    @* @foreach(var pl in proj.ProjectLanguage) *@
+                    @for(int k=0;k<proj.ProjectLanguage.Count;k++)
+                    {
+                        var pl = proj.ProjectLanguage[k];
+                        if(pl.IsChecked == true)
+                        {
+                            @* <label name="Experience[@i].Project[@j].ProjectLanguage[@k].ProjectLanguageName">@pl.ProjectLanguageName</label> *@
+                            @pl.ProjectLanguageName
+                        }
+                    }
+                    </lable>
+                </div>
+            }
+        </div>
+    }
+</div>

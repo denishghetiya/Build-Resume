@@ -1,0 +1,55 @@
+﻿@using HtmlHelpers.BeginCollectionItemCore
+@model BuildResume.ViewModels.ProjectViewModel
+@{
+    //var a = Model.parentPrefix;
+    var parentPrefix = ViewData["ParentPrefix"] as string ?? null;
+    var datad = parentPrefix == null ? "Projects" : parentPrefix + ".Projects";
+}
+
+@using (Html.BeginCollectionItem(datad))
+{
+    <div class="partial-project form-check">
+        <strong>Project</strong><br />
+        <input type="hidden" asp-for="ProjectId" />
+
+        <a id="removeProject" class="btn btn-sm btn-danger remove-project">Remove Project</a>
+        <br /><br />
+
+        <div class="row mb-3 errorproj">
+            <div class="col-md-4">
+                <label asp-for="ProjectName" class="form-label">ProjectName</label>
+                <input asp-for="ProjectName" type="text" value="@Model.ProjectName" class="form-control" />
+                <span asp-validation-for="ProjectName" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="TechnologyNames" class="form-label">TechnologyNames</label>
+                <input asp-for="TechnologyNames" type="text" value="@Model.TechnologyNames" class="form-control" />
+                <span asp-validation-for="TechnologyNames" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="Role" class="form-label">Role</label>
+                <input asp-for="Role" type="text" value="@Model.Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="StartDate" class="form-label">StartDate</label>
+                <input asp-for="StartDate" type="date" value="@Model.StartDate.ToString("yyyy-MM-dd")" class="form-control" min="" max="" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="EndDate" class="form-label">EndDate</label>
+                <input asp-for="EndDate" type="date" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="form-control" min="" max="" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+        </div>
+        <br />
+
+        <strong>ProjectLanguage</strong><br />
+        <div class="errorpl">
+            @foreach (var projectLanguage in Model.ProjectLanguage)
+            {
+                @await Html.PartialAsync("_ProjectLanguage", projectLanguage)
+            }
+        </div><br /><br />
+    </div>
+}

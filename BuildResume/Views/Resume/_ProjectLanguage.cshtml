@@ -1,0 +1,15 @@
+﻿@using HtmlHelpers.BeginCollectionItemCore
+@model BuildResume.ViewModels.ProjectLanguageViewModel
+
+@using (Html.BeginCollectionItem("ProjectLanguage"))
+{
+    <div class="form-check projectlanguage">
+       
+        <input type="hidden" asp-for="ProjectLanguageId" />
+        <input type="hidden" asp-for="ProjectLanguageName" />
+
+        <input type="checkbox" asp-for="IsChecked" class="form-check-input" />
+
+        <label class="form-check-label">@Model.ProjectLanguageName</label>
+    </div>
+}

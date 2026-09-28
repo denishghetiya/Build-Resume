@@ -1,0 +1,57 @@
+﻿@using HtmlHelpers.BeginCollectionItemCore
+@model BuildResume.ViewModels.ExperienceViewModel
+
+@using (Html.BeginCollectionItem("Experience"))
+{
+    <div class="partial-item department-container">
+        <strong>Experience</strong><br /><br />
+        <input type="hidden" asp-for="ExperienceId" />
+
+        <a id="removeExperience" class="btn btn-sm btn-danger remove-item remove-experience">Remove Experience</a>
+        <br /><br />
+
+        <div class="row mb-3 errorexp">
+            <div class="col-md-4">
+                <label asp-for="CompanyName" class="form-label">CompanyName</label>
+                <input asp-for="CompanyName" type="text" value="@Model.CompanyName" class="form-control" />
+                <span asp-validation-for="CompanyName" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="StartDate" class="form-label">StartDate</label>
+                <input asp-for="StartDate" type="date" value="@Model.StartDate.ToString("yyyy-MM-dd")" class="form-control" min="" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <label asp-for="EndDate" class="form-label">EndDate</label>
+                <input asp-for="EndDate" type="date" value="@Model.EndDate.ToString("yyyy-MM-dd")" class="form-control" min="" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                <span asp-validation-for="EndDate" class="text-danger"></span>
+            </div>
+            @* @if (Model.ExperienceId != null && Model.ExperienceId != 0)
+            { *@
+            @* <div class="col-md-4">
+                <label asp-for="ExperienceInYear" class="form-label">ExperienceInYear</label>
+                <input asp-for="ExperienceInYear" type="number" step="any" value="@Model.ExperienceInYear" class="form-control" readonly />
+            </div> *@
+            <div class="col-md-4">
+                <label asp-for="Experience" class="form-label">Experience</label>
+                <input asp-for="Experience" type="text" value="@Model.Experience" class="form-control" readonly style="pointer-events: none;" />
+            </div>
+            @* } *@
+            <div class="col-md-4">
+                <label asp-for="Role" class="form-label">Role</label>
+                <input asp-for="Role" type="text" value="@Model.Role" class="form-control" />
+                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="project-container" id="partialViewContainerproject">
+            <button type="button" class="btn btn-sm btn-primary add-project" id="addPartialButtonproject" data-prefix="@ViewData.TemplateInfo.HtmlFieldPrefix">Add New Project</button>
+            <br /><br />
+            @foreach (var projects in Model.Projects)
+            {
+                @await Html.PartialAsync("_Projects", projects)
+            }
+        </div>
+    <hr />
+    </div>
+}

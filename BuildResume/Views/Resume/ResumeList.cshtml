@@ -1,0 +1,38 @@
+﻿@model BuildResume.ViewModels.ProjectList
+<div class="col-md-11 text-end">
+    <a href="/Resume/CreateResume" class="btn btn-info">Add Resume</a>
+</div>
+
+<div class="fs-5 text-dark fw-bolder">Filter Options :</div>
+    <div class="row mb-2">
+        <div class="col">
+            <label class="form-label fw-bold">FirstName or LastName:</label>
+            <input type="text" class="form-control" id="searchName" />
+        </div>
+        <div class="col">
+            <label class="form-label fw-bold">Phone Number:</label>
+            <input type="text" class="form-control" id="searchPhone" onkeypress="return (event.charCode !=8 && event.charCode ==0 || (event.charCode >= 48 && event.charCode <= 57))" />
+        </div>
+        <div class="col">
+            <label class="form-label fw-bold">Email :</label>
+            <input type="text" class="form-control" id="searchEmail" />
+        </div>
+        <div class="col">
+            <label class="form-label fw-bold">Project:</label>
+            <select id="searchProject" class="form-control" multiple>
+                @foreach (var project in Model.ProjList)
+                {
+                    <option value="@project">@project</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="d-flex justify-content-end">
+        <button type="reset" class="btn btn-sm btn-secondary me-2" onclick="FilterOrReset()" >Reset</button>
+        <button type="button" class="btn btn-sm btn-primary" onclick="FilterOrReset('apply')" >Apply</button>
+    </div>
+
+<table class="table align-middle table-row-dashed fs-6 gy-5" id="resumeList" ></table>
+
+
+<script src="~/js/site.js" asp-append-version="true"></script>

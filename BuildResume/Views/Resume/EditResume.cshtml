@@ -1,0 +1,68 @@
+﻿@* @model BuildResume.ViewModels.ResumeDataViewModel 
+<div class="row">
+    <div class="col">
+        <form id="editResumeForm" class="p-3">
+        
+            <input type="hidden" asp-for="UserId" />
+        
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <label asp-for="FirstName" class="form-label">FirstName</label>
+                    <input asp-for="FirstName" type="text" value="@Model.FirstName" class="form-control" />
+                    <span asp-validation-for="FirstName" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="LastName" class="form-label">LastName</label>
+                    <input asp-for="LastName" type="text" value="@Model.LastName" class="form-control" />
+                    <span asp-validation-for="LastName" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="PhoneNumber" class="form-label">PhoneNumber</label>
+                    <input asp-for="PhoneNumber" type="number" value="@Model.PhoneNumber" class="form-control" min="10"/>
+                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                </div>
+                <div class="col-md-3">
+                    <label asp-for="Email" class="form-label">Email</label>
+                    <input asp-for="Email" type="email" value="@Model.Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+            </div>
+        
+            <div class="form-group">
+             
+                <a class="btn btn-sm btn-info" id="addPartialButton">Add New Experience</a>
+                <br /><br />
+                <div class="row" id="partialViewContainer">
+                    
+                    @foreach (var experince in Model.Experience)
+                    {
+                        <div class="col-md-10">
+                            @await Html.PartialAsync("_Experience", experince)
+                        </div><hr/>
+                    }
+                </div>
+            </div>
+            <br/>
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="ResumeList" class="btn btn-secondary">Cancel</a>
+        
+        </form>
+    </div>
+    <br />
+    <div class="col">
+        <div>
+            <strong>Summary :</strong><br /><br />
+            FirstName: <span id="firstnamesumary"></span><br />
+            LastName: <span id="lastnamesumary"></span><br />
+            PhoneNumber: <span id="phoneNumbersumary"></span><br />
+            Email: <span id="emailsumary"></span><br /><br />
+        
+            <div id="experienceSummary">
+                <strong>Experiences:</strong>
+                <div id="experiencesContainer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/site.js" asp-append-version="true"></script> *@
